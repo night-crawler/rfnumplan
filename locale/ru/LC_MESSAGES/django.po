@@ -1,0 +1,172 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-06-30 22:38+0300\n"
+"PO-Revision-Date: 2016-06-30 22:38+0140\n"
+"Last-Translator: b'  <admin@force.fm>'\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: \n"
+"Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n%100>=11 && n%100<=14)? 2 : 3);\n"
+"X-Translated-Using: django-rosetta 0.7.11\n"
+
+#: management/commands/rfnumplan.py:21
+msgid ""
+"Shows operators, num plan ranges, etc. Example:\n"
+" python manage.py rfnumplan 79251234567"
+msgstr ""
+"Отображает список операторов, диапазоны плана нумерации, и др. Пример:\n"
+"\n"
+"python manage.py rfnumplan 79251234567"
+
+#: management/commands/rfnumplan.py:43
+msgid "fetch numbering plan's data from urls"
+msgstr "загрузить по указанным url данные планов нумерации"
+
+#: management/commands/rfnumplan.py:45
+msgid "force numbering plans update"
+msgstr "принудительное обновление планов нумерации"
+
+#: management/commands/rfnumplan.py:47
+msgid "clear all numbering plans content"
+msgstr "очистить план нумерации"
+
+#: management/commands/rfnumplan.py:49
+msgid "show all plan range prefixes"
+msgstr "отобразить все префиксы диапазонов нумерации"
+
+#: management/commands/rfnumplan.py:51
+msgid "phones to check"
+msgstr "телефоны для проверки"
+
+#: management/commands/rfnumplan.py:56
+#, python-format
+#| msgid "%(force)sLoading `%(name)` numbering plan..."
+msgid "%(force)sLoading `%(name)s` numbering plan..."
+msgstr "%(force)sЗагрузка плана нумерации `%(name)s..."
+
+#: management/commands/rfnumplan.py:57
+msgid "[FORCE] "
+msgstr "[НАСИЛЬСТВЕННАЯ] "
+
+#: management/commands/rfnumplan.py:61
+#, python-format
+msgid "Loaded %s objects"
+msgstr "Загружено %s объект(ов)"
+
+#: management/commands/rfnumplan.py:65
+msgid "Removing all data"
+msgstr "Удаление всех данных"
+
+#: management/commands/rfnumplan.py:70
+msgid "Removed all data"
+msgstr "Удалены все данные"
+
+#: management/commands/rfnumplan.py:103
+msgid "Found numbering plan ranges:"
+msgstr "Найдены диапазоны планов нумерации:"
+
+#: models.py:62
+msgid "operator name"
+msgstr "имя оператора"
+
+#: models.py:65 models.py:152
+msgid "operator"
+msgstr "оператор"
+
+#: models.py:66
+msgid "operators"
+msgstr "операторы"
+
+#: models.py:74
+msgid "region name"
+msgstr "название области"
+
+#: models.py:77 models.py:153
+msgid "region"
+msgstr "область"
+
+#: models.py:78
+msgid "regions"
+msgstr "области"
+
+#: models.py:86 models.py:93 models.py:146
+msgid "numbering plan"
+msgstr "план нумерации"
+
+#: models.py:86
+msgid "e.g. rossviaz 4xx"
+msgstr "например, rossviaz 4хх"
+
+#: models.py:87 models.py:147
+msgid "prefix"
+msgstr "префикс"
+
+#: models.py:87
+msgid "e.g. 7"
+msgstr "например, 7"
+
+#: models.py:88
+msgid "url"
+msgstr "URL-адрес"
+
+#: models.py:89
+msgid "loaded"
+msgstr "загружено"
+
+#: models.py:90
+msgid "last modified"
+msgstr "последне изменение"
+
+#: models.py:94
+msgid "numbering plans"
+msgstr "планы нумерации"
+
+#: models.py:147
+msgid "e.g. 495"
+msgstr "например, 495"
+
+#: models.py:148
+msgid "range start"
+msgstr "начало диапазона"
+
+#: models.py:148
+msgid "`1`-prefixed range start"
+msgstr "качало диапазона с префиксным `1`"
+
+#: models.py:149
+msgid "range end"
+msgstr "конец диапазона"
+
+#: models.py:149
+msgid "`1`-prefixed range end"
+msgstr "конец диапазона с префиксным `1`"
+
+#: models.py:150
+msgid "range capacity"
+msgstr "ёмкость диапазона"
+
+#: models.py:156
+msgid "numbering plan range"
+msgstr "диапазон плана нумерации"
+
+#: models.py:157
+msgid "numbering plan ranges"
+msgstr "диапазоны планов нумерации"
+
+#: models.py:188
+#, python-format
+msgid "Wrong number %s"
+msgstr "Неправильный номер %s"
+
+#~ msgid "update plans by provided urls"
+#~ msgstr "обновление планов нумерации по URL-адресами"

@@ -1,0 +1,46 @@
+[
+{
+    "model": "rfnumplan.numberingplan",
+    "pk": 3,
+    "fields": {
+        "name": "3xx",
+        "prefix": 7,
+        "plan_uri": "http://www.rossvyaz.ru/docs/articles/Kody_ABC-3kh.csv",
+        "loaded": true,
+        "last_modified": "2016-03-31T23:08:15Z"
+    }
+},
+{
+    "model": "rfnumplan.numberingplan",
+    "pk": 4,
+    "fields": {
+        "name": "4xx",
+        "prefix": 7,
+        "plan_uri": "http://www.rossvyaz.ru/docs/articles/Kody_ABC-4kh.csv",
+        "loaded": true,
+        "last_modified": "2016-03-31T23:08:30Z"
+    }
+},
+{
+    "model": "rfnumplan.numberingplan",
+    "pk": 5,
+    "fields": {
+        "name": "8xx",
+        "prefix": 7,
+        "plan_uri": "http://www.rossvyaz.ru/docs/articles/Kody_ABC-8kh.csv",
+        "loaded": true,
+        "last_modified": "2016-03-31T23:08:23Z"
+    }
+},
+{
+    "model": "rfnumplan.numberingplan",
+    "pk": 6,
+    "fields": {
+        "name": "9xx",
+        "prefix": 7,
+        "plan_uri": "http://www.rossvyaz.ru/docs/articles/Kody_DEF-9kh.csv",
+        "loaded": true,
+        "last_modified": "2016-03-31T23:08:35Z"
+    }
+}
+]
