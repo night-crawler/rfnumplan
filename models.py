@@ -9,7 +9,6 @@ from django.db import models
 from django.forms import model_to_dict
 
 from rfnumplan.utils import read_csv_num_plan, map_instances_by_name
-from model_utils.models import TimeStampedModel
 from django.utils.translation import ugettext_lazy as _
 
 from .settings import MAX_PREFIX_LENGTH
@@ -143,7 +142,7 @@ class NumberingPlan(ModelDiffMixin, models.Model):
 
 
 class NumberingPlanRange(models.Model):
-    numbering_plan = models.ForeignKey(NumberingPlan, verbose_name=_('numbering plan'))
+    numbering_plan = models.ForeignKey(NumberingPlan, verbose_name=_('numbering plan'), related_name='ranges')
     prefix = models.PositiveIntegerField(_('prefix'), help_text=_('e.g. 495'))
     range_start = models.PositiveIntegerField(_('range start'), help_text=_('`1`-prefixed range start'))
     range_end = models.PositiveIntegerField(_('range end'), help_text=_('`1`-prefixed range end'))
@@ -155,7 +154,7 @@ class NumberingPlanRange(models.Model):
     class Meta:
         verbose_name = _('numbering plan range')
         verbose_name_plural = _('numbering plan ranges')
-        ordering = ['numbering_plan_id']
+        ordering = ['numbering_plan_id', 'prefix', 'range_start']
 
     def __str__(self):
         return '%s [%s; %s]' % (self.numbering_plan.name, str(self.range_start)[1:], str(self.range_end)[1:])

@@ -6,6 +6,7 @@ Django-батарейка для поиска диапазонов по план
 - requests
 - django
 - python-dateutil
+- terminaltables
 
 ---
 

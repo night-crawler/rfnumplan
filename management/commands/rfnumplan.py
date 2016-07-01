@@ -1,5 +1,8 @@
 import phonenumbers
 
+from terminaltables import SingleTable
+
+from django.db.models import Q
 from django.utils.translation import activate
 from django.conf import settings
 from django.utils.translation import ugettext_lazy as _
@@ -14,6 +17,7 @@ def color_style():
     style.SUCCESS = termcolors.make_style(fg='green', opts=('bold',))
     style.ERROR = termcolors.make_style(fg='red', opts=('bold',))
     style.INFO = termcolors.make_style(fg='blue', opts=('bold',))
+    style.DEFAULT = termcolors.make_style()
     return style
 
 
@@ -39,6 +43,14 @@ class Command(BaseCommand):
         self.stderr.flush()
 
     def add_arguments(self, parser):
+        parser.add_argument('--operator', action='append', default=[],
+                            help=str(_('Filter --plan with operator name(s)')))
+        parser.add_argument('--region', action='append', default=[],
+                            help=str(_('Filter --plan with region name(s)')))
+        parser.add_argument('--plan', default='',
+                            help=str(_('Show ranges for plan (id|name)')))
+        parser.add_argument('--list-plans', action='store_true', default=False,
+                            help=str(_('show numbering plans')))
         parser.add_argument('--update', action='store_true', default=False,
                             help=str(_('fetch numbering plan\'s data from urls')))
         parser.add_argument('--force', action='store_true', default=False,
@@ -49,6 +61,61 @@ class Command(BaseCommand):
                             help=str(_('show all plan range prefixes')))
         parser.add_argument('phones', nargs='*', default=[], type=str,
                             help=str(_('phones to check')))
+
+    @staticmethod
+    def get_phone_info(num) -> dict:
+        from rfnumplan.models import NumberingPlanRange
+        n = phonenumbers.parse(num, region='RU')
+        res = {
+            'num': num,
+            'e164': phonenumbers.format_number(n, phonenumbers.PhoneNumberFormat.E164),
+            'possible': phonenumbers.is_possible_number(n),
+            'valid': phonenumbers.is_valid_number(n),
+            'info': []
+        }
+
+        if res['valid']:
+            res['info'] = NumberingPlanRange.find(res['e164'])
+
+        return res
+
+    def handle_list_plans(self):
+        from rfnumplan.models import NumberingPlan
+        fields = ['id', 'name', 'prefix', 'loaded', 'last_modified']
+        header = [_('id'), _('name'), _('prefix'), _('loaded'), _('last modified')]
+        data = [header, *NumberingPlan.objects.values_list(*fields)]
+        self.log(SingleTable(data, title=str(_('Numbering plans'))).table, clr='DEFAULT')
+
+    def handle_list_plan_ranges(self, args, options):
+        from rfnumplan.models import NumberingPlan
+        plan_id_or_name, operators, regions = options.get('plan'), options.get('operator'), options.get('region')
+        if plan_id_or_name.isdigit():
+            plan = NumberingPlan.objects.get(pk=plan_id_or_name)
+        else:
+            plan = NumberingPlan.objects.get(name=plan_id_or_name)
+
+        ranges = plan.ranges.all()
+        if operators:
+            filters = Q()
+            for operator in operators:
+                filters |= Q(operator__name__icontains=operator)
+            ranges = ranges.filter(filters)
+        if regions:
+            filters = Q()
+            for region in regions:
+                filters |= Q(region__name__icontains=region)
+            ranges = ranges.filter(filters)
+
+        fields = ['prefix', 'range_start', 'range_end', 'range_capacity', 'operator__name', 'region__name']
+        header = [_('prefix'), _('start'), _('end'), _('capacity'), _('operator'), _('region')]
+        ranges_data = []
+        for r in ranges.values(*fields):
+            r['range_start'] = str(r['range_start'])[1:]
+            r['range_end'] = str(r['range_end'])[1:]
+            ranges_data.append([r[field] for field in fields])
+
+        data = [header, *ranges_data]
+        self.log(SingleTable(data, title=str(_('Numbering plan ranges [x%s]')) % len(ranges_data)).table, clr='DEFAULT')
 
     def handle_update(self, force=False):
         from rfnumplan.models import NumberingPlan
@@ -68,23 +135,6 @@ class Command(BaseCommand):
         m.NumberingPlanRange.objects.all().delete()
         # m.NumberingPlan.objects.all().delete()
         self.log(_('Removed all data'), clr='SUCCESS')
-
-    @staticmethod
-    def get_phone_info(num) -> dict:
-        from rfnumplan.models import NumberingPlanRange
-        n = phonenumbers.parse(num, region='RU')
-        res = {
-            'num': num,
-            'e164': phonenumbers.format_number(n, phonenumbers.PhoneNumberFormat.E164),
-            'possible': phonenumbers.is_possible_number(n),
-            'valid': phonenumbers.is_valid_number(n),
-            'info': []
-        }
-
-        if res['valid']:
-            res['info'] = NumberingPlanRange.find(res['e164'])
-
-        return res
 
     def handle_prefixes(self):
         from rfnumplan.models import NumberingPlanRange
@@ -117,6 +167,14 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         activate(settings.LANGUAGE_CODE)
+        if options.get('plan'):
+            self.handle_list_plan_ranges(args, options)
+            return
+
+        if options.get('list_plans'):
+            self.handle_list_plans()
+            return
+
         if options.get('prefixes'):
             self.handle_prefixes()
             return
