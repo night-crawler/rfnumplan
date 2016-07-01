@@ -34,3 +34,14 @@ $ ./manage.py rfnumplan --prefixes
 ```
 
 ![Загрузка плана нумерации с сайта rossvyaz](https://cloud.githubusercontent.com/assets/1235203/16502698/5674eaa6-3f18-11e6-8765-6821782313cc.png)
+
+---
+##### Поиск диапазонов по региону и оператору
+
+```
+./manage.py rfnumplan --plan=9xx --operator=Т2 --region=Москва
+./manage.py rfnumplan --plan=9xx --operator="Мобильные ТелеСистемы"
+./manage.py rfnumplan --plan=9xx --region=Москва --region=Петербург --operator=скар
+
+```
+![Поиск диапазонов по региону и оператору](https://cloud.githubusercontent.com/assets/1235203/16522216/fe590f90-3fa4-11e6-95ab-c38c757337ca.png)
