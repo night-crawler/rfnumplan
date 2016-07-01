@@ -37,3 +37,22 @@ def map_instances_by_name(model_class, items_names: list) -> dict:
     missing = set(items_names) - set(existent_item_names)
     model_class.objects.bulk_create(model_class(name=name) for name in missing)
     return {item.name: item for item in model_class.objects.filter(name__in=items_names)}
+
+
+def range_to_prefix(a, b):
+    def inner(aa, bb, p):
+        if p == 1:
+            if a <= aa <= b:
+                yield aa
+            return
+
+        for d in range(aa, bb + 1, p):
+            if a <= d and d + p - 1 <= b:
+                yield d // p
+            elif not (bb < a or aa > b):
+                for i in range(10):
+                    yield from inner(d + i * p // 10, d + (i + 1) * p // 10 - 1, p // 10)
+
+    a, b = int(a), int(b)
+    p = 10**(max(len(str(x)) for x in (a, b)) - 1)
+    yield from inner(a // p * p, b // p * p + p - 1, p)

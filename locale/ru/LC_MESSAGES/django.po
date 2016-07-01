@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-06-30 22:38+0300\n"
-"PO-Revision-Date: 2016-06-30 22:38+0140\n"
+"POT-Creation-Date: 2016-07-02 02:41+0300\n"
+"PO-Revision-Date: 2016-07-02 02:44+0140\n"
 "Last-Translator: b'  <admin@force.fm>'\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -19,7 +19,7 @@ msgstr ""
 "Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n%100>=11 && n%100<=14)? 2 : 3);\n"
 "X-Translated-Using: django-rosetta 0.7.11\n"
 
-#: management/commands/rfnumplan.py:21
+#: management/commands/rfnumplan.py:47
 msgid ""
 "Shows operators, num plan ranges, etc. Example:\n"
 " python manage.py rfnumplan 79251234567"
@@ -28,142 +28,272 @@ msgstr ""
 "\n"
 "python manage.py rfnumplan 79251234567"
 
-#: management/commands/rfnumplan.py:43
-msgid "fetch numbering plan's data from urls"
-msgstr "загрузить по указанным url данные планов нумерации"
+#: management/commands/rfnumplan.py:69
+msgid "Set locale LOCALE"
+msgstr "Установить LOCALE локаль"
 
-#: management/commands/rfnumplan.py:45
-msgid "force numbering plans update"
-msgstr "принудительное обновление планов нумерации"
+#: management/commands/rfnumplan.py:71
+msgid "Show page with PAGE number"
+msgstr "Отобразить страницу с номером PAGE"
 
-#: management/commands/rfnumplan.py:47
-msgid "clear all numbering plans content"
-msgstr "очистить план нумерации"
+#: management/commands/rfnumplan.py:73
+msgid "Set page size for tables"
+msgstr "Установить размер страницы для таблиц"
 
-#: management/commands/rfnumplan.py:49
-msgid "show all plan range prefixes"
-msgstr "отобразить все префиксы диапазонов нумерации"
+#: management/commands/rfnumplan.py:75
+msgid "Filter --plan with operator name(s)"
+msgstr "Уточнить названия отображаемых операторов --plan"
 
-#: management/commands/rfnumplan.py:51
-msgid "phones to check"
-msgstr "телефоны для проверки"
+#: management/commands/rfnumplan.py:77
+msgid "Filter --plan with region name(s)"
+msgstr "Уточнить названия отображаемых регионов --plan"
 
-#: management/commands/rfnumplan.py:56
+#: management/commands/rfnumplan.py:79 management/commands/rfnumplan.py:81
+msgid "Exclude region from --plan output"
+msgstr "Исключить область из --plan"
+
+#: management/commands/rfnumplan.py:83
+msgid "Show ranges for plan (id|name)"
+msgstr "Отобразить диапазоны для плана (id|название)"
+
+#: management/commands/rfnumplan.py:85
+msgid "Show numbering plans"
+msgstr "Показать планы нумерации"
+
+#: management/commands/rfnumplan.py:87
+msgid "Converts ranges into prefixes"
+msgstr "Превращает диапазоны в префиксы"
+
+#: management/commands/rfnumplan.py:89
+msgid "Output --prefixes and save it to csv if filepath specified"
+msgstr "Сохраняет выхлоп --prefixes в csv"
+
+#: management/commands/rfnumplan.py:91
+msgid "Add cost into csv output"
+msgstr "Добавить столбец cost в csv"
+
+#: management/commands/rfnumplan.py:93
+msgid "Add price into csv output"
+msgstr "Добавить столбец price в csv"
+
+#: management/commands/rfnumplan.py:95
+msgid "Fetch numbering plan's data from urls"
+msgstr "Загрузить по указанным url данные планов нумерации"
+
+#: management/commands/rfnumplan.py:97
+msgid "Force numbering plans update"
+msgstr "Принудительное обновление планов нумерации"
+
+#: management/commands/rfnumplan.py:99
+msgid "Clear all numbering plans content"
+msgstr "Очистить план нумерации"
+
+#: management/commands/rfnumplan.py:101
+#| msgid "Show all plan range prefixes"
+msgid "Show plan range prefixes summary"
+msgstr "Отобразить количество диапазонов по префиксам в планах нумерации"
+
+#: management/commands/rfnumplan.py:103
+msgid "Phones to check"
+msgstr "Телефоны для проверки"
+
+#: management/commands/rfnumplan.py:138
+msgid "ID"
+msgstr "ID"
+
+#: management/commands/rfnumplan.py:138
+msgid "Name"
+msgstr "Название"
+
+#: management/commands/rfnumplan.py:138
+msgid "Prefix"
+msgstr "Префикс"
+
+#: management/commands/rfnumplan.py:138
+msgid "Loaded"
+msgstr "Загружено"
+
+#: management/commands/rfnumplan.py:138
+msgid "Last modified"
+msgstr "Последне изменение"
+
+#: management/commands/rfnumplan.py:140
+msgid "Numbering plans"
+msgstr "Планы нумерации"
+
+#: management/commands/rfnumplan.py:188 management/commands/rfnumplan.py:230
+msgid "#"
+msgstr "#"
+
+#: management/commands/rfnumplan.py:188 management/commands/rfnumplan.py:230
+msgid "###"
+msgstr "###"
+
+#: management/commands/rfnumplan.py:188
+msgid "Start"
+msgstr "Начало"
+
+#: management/commands/rfnumplan.py:188
+msgid "End"
+msgstr "Конец"
+
+#: management/commands/rfnumplan.py:188
+msgid "Capacity"
+msgstr "Ёмкость диапазона"
+
+#: management/commands/rfnumplan.py:188
+msgid "Operator"
+msgstr "Оператор"
+
+#: management/commands/rfnumplan.py:188
+msgid "Region"
+msgstr "Область"
+
+#: management/commands/rfnumplan.py:200
 #, python-format
-#| msgid "%(force)sLoading `%(name)` numbering plan..."
+msgid "Numbering plan ranges [x%s]"
+msgstr "Диапазоны планов нумерации  [x%s]"
+
+#: management/commands/rfnumplan.py:202
+#, python-format
+msgid "Numbering plan ranges [x%(count)s], page %(page)s of %(num_pages)s"
+msgstr ""
+"Диапазоны планов набора [x%(count)s], страница %(page)s из %(num_pages)s"
+
+#: management/commands/rfnumplan.py:213
+#, python-format
 msgid "%(force)sLoading `%(name)s` numbering plan..."
 msgstr "%(force)sЗагрузка плана нумерации `%(name)s..."
 
-#: management/commands/rfnumplan.py:57
+#: management/commands/rfnumplan.py:214
 msgid "[FORCE] "
 msgstr "[НАСИЛЬСТВЕННАЯ] "
 
-#: management/commands/rfnumplan.py:61
+#: management/commands/rfnumplan.py:218
 #, python-format
 msgid "Loaded %s objects"
 msgstr "Загружено %s объект(ов)"
 
-#: management/commands/rfnumplan.py:65
+#: management/commands/rfnumplan.py:222
 msgid "Removing all data"
 msgstr "Удаление всех данных"
 
-#: management/commands/rfnumplan.py:70
+#: management/commands/rfnumplan.py:227
 msgid "Removed all data"
 msgstr "Удалены все данные"
 
-#: management/commands/rfnumplan.py:103
+#: management/commands/rfnumplan.py:230
+#| msgid "Numbering plans"
+msgid "Numbering plan"
+msgstr "План нумерации"
+
+#: management/commands/rfnumplan.py:230
+msgid "Count"
+msgstr "Количество"
+
+#: management/commands/rfnumplan.py:237
+#| msgid "Show all plan range prefixes"
+msgid "Plan range prefixes summary"
+msgstr "Количество диапазонов по префиксам в планах нумерации"
+
+#: management/commands/rfnumplan.py:267
+#, python-format
+msgid "%(count)s rows written into %(file)s"
+msgstr "%(count)s строк записано в %(file)s"
+
+#: management/commands/rfnumplan.py:283
 msgid "Found numbering plan ranges:"
 msgstr "Найдены диапазоны планов нумерации:"
 
-#: models.py:62
+#: models.py:61
 msgid "operator name"
 msgstr "имя оператора"
 
-#: models.py:65 models.py:152
+#: models.py:64 models.py:154
 msgid "operator"
 msgstr "оператор"
 
-#: models.py:66
+#: models.py:65
 msgid "operators"
 msgstr "операторы"
 
-#: models.py:74
+#: models.py:73
 msgid "region name"
 msgstr "название области"
 
-#: models.py:77 models.py:153
+#: models.py:76 models.py:155
 msgid "region"
 msgstr "область"
 
-#: models.py:78
+#: models.py:77
 msgid "regions"
 msgstr "области"
 
-#: models.py:86 models.py:93 models.py:146
+#: models.py:85 models.py:92 models.py:148
 msgid "numbering plan"
 msgstr "план нумерации"
 
-#: models.py:86
+#: models.py:85
 msgid "e.g. rossviaz 4xx"
 msgstr "например, rossviaz 4хх"
 
-#: models.py:87 models.py:147
+#: models.py:86 models.py:149
 msgid "prefix"
 msgstr "префикс"
 
-#: models.py:87
+#: models.py:86
 msgid "e.g. 7"
 msgstr "например, 7"
 
-#: models.py:88
+#: models.py:87
 msgid "url"
 msgstr "URL-адрес"
 
-#: models.py:89
+#: models.py:88
 msgid "loaded"
 msgstr "загружено"
 
-#: models.py:90
+#: models.py:89
 msgid "last modified"
 msgstr "последне изменение"
 
-#: models.py:94
+#: models.py:93
 msgid "numbering plans"
 msgstr "планы нумерации"
 
-#: models.py:147
+#: models.py:149
 msgid "e.g. 495"
 msgstr "например, 495"
 
-#: models.py:148
+#: models.py:150
 msgid "range start"
 msgstr "начало диапазона"
 
-#: models.py:148
+#: models.py:150
 msgid "`1`-prefixed range start"
 msgstr "качало диапазона с префиксным `1`"
 
-#: models.py:149
+#: models.py:151
 msgid "range end"
 msgstr "конец диапазона"
 
-#: models.py:149
+#: models.py:151
 msgid "`1`-prefixed range end"
 msgstr "конец диапазона с префиксным `1`"
 
-#: models.py:150
+#: models.py:152
 msgid "range capacity"
 msgstr "ёмкость диапазона"
 
-#: models.py:156
+#: models.py:158
 msgid "numbering plan range"
 msgstr "диапазон плана нумерации"
 
-#: models.py:157
+#: models.py:159
 msgid "numbering plan ranges"
 msgstr "диапазоны планов нумерации"
 
-#: models.py:188
+#: models.py:190
 #, python-format
 msgid "Wrong number %s"
 msgstr "Неправильный номер %s"

@@ -8,7 +8,7 @@ from django.contrib.contenttypes.models import ContentType
 from django.db import models
 from django.forms import model_to_dict
 
-from rfnumplan.utils import read_csv_num_plan, map_instances_by_name
+from rfnumplan.utils import read_csv_num_plan, map_instances_by_name, range_to_prefix
 from django.utils.translation import ugettext_lazy as _
 
 from .settings import MAX_PREFIX_LENGTH
@@ -140,6 +140,9 @@ class NumberingPlan(ModelDiffMixin, models.Model):
 
         return res
 
+    def range_prefixes(self):
+        return self.ranges.order_by('prefix').values_list('prefix').annotate(cnt=models.Count('prefix'))
+
 
 class NumberingPlanRange(models.Model):
     numbering_plan = models.ForeignKey(NumberingPlan, verbose_name=_('numbering plan'), related_name='ranges')
@@ -205,4 +208,20 @@ class NumberingPlanRange(models.Model):
 
     @staticmethod
     def range_prefixes():
-        return NumberingPlanRange.objects.values_list('prefix').annotate(cnt=models.Count('prefix'))
+        return NumberingPlanRange.objects.order_by('prefix').values_list('prefix').annotate(cnt=models.Count('prefix'))
+
+    def to_prefix_list(self):
+        start = ''.join(map(str, [self.numbering_plan.prefix, self.prefix, str(self.range_start)[1:]]))
+        end = ''.join(map(str, [self.numbering_plan.prefix, self.prefix, str(self.range_end)[1:]]))
+
+        for prefix in range_to_prefix(start, end):
+            yield str(prefix)
+
+    def get_display(self):
+        return '+%s (%s) [%s - %s] x%s' % (
+            self.numbering_plan.prefix,
+            self.prefix,
+            str(self.range_start)[1:],
+            str(self.range_end)[1:],
+            self.range_capacity
+        )
